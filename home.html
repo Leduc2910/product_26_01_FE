@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-    <h1>Quản lý thông tin sản phẩm</h1>
+    <h1 onclick="showHome()">Quản lý thông tin sản phẩm</h1>
     <button onclick="showFormCreate()">Thêm mới</button>
     <br>
     <br>
@@ -17,6 +17,9 @@
     <input type="text" id="minPrice" placeholder="Nhập giá thấp nhất"> -
     <input type="text" id="maxPrice" placeholder="Nhập giá cao nhất">
     <button onclick="filByPrice()">Tìm kiếm</button>
+    <br><br>
+    <select id="filCate" onchange="filterByCategory()"></select>
+    <br><br>
     <div id="main">
     </div>
 </center>

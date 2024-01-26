@@ -102,3 +102,45 @@ function filByPrice() {
             document.getElementById("main").innerHTML = html;
         })
 }
+function showFilterCategory() {
+    axios.get('http://localhost:8080/categories')
+        .then(function (response) {
+            let categories = response.data;
+            let html = ''
+            for (let i = 0; i < categories.length; i++) {
+                html += `<option value="${categories[i].id}">${categories[i].name}</option>`
+            }
+            document.getElementById("filCate").innerHTML = html;
+        })
+}
+showFilterCategory()
+function filterByCategory() {
+    let idCate = document.getElementById("filCate").value;
+    axios.get(`http://localhost:8080/products/category/${idCate}`)
+        .then(function (response) {
+            let productList = response.data;
+            let html = ` <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th colspan="2">Action</th>
+        </tr>`
+            for (let i = 0;i < productList.length; i++) {
+                html += `        
+        <tr>
+            <td>${productList[i].id}</td>
+            <td>${productList[i].name}</td>
+            <td>${productList[i].price}</td>
+            <td>${productList[i].quantity}</td>
+            <td>${productList[i].category.name}</td>
+            <td><button onclick="showFormEdit(${productList[i].id})">Sửa</button></td>
+            <td><button onclick="remove(${productList[i].id})">Xóa</button></td>
+        </tr>`
+            }
+            html += '</table>'
+            document.getElementById("main").innerHTML = html;
+        })
+}
